@@ -1,0 +1,85 @@
+.LOGIN 
+{
+    width: 100%;
+    height: 100%;
+    background-image: url("../../../../assets/images/background.jpeg");
+    
+    .LOGIN-TOP 
+    {
+        display: flex;
+        flex-direction: column;
+        height: 40%;
+        align-items: center;
+        justify-content: flex-end;
+
+        .LOGIN-IMAGE 
+        {
+            display: flex;
+            justify-content: center;
+
+            img
+            {
+                width: 7rem;
+                height: 7rem;
+                content: url("./assets/logo.svg");
+            }
+        }
+
+        .LOGIN-TITLE
+        {
+            margin-top: 2rem;
+            font-family: "BLKCHCRY";
+            font-size: 2rem;
+            text-align: center;
+        }
+    }
+
+    .LOGIN-CONTENT
+    {
+        height: 60%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+
+        .LOGIN-FORM 
+        {
+            margin-top: 3rem;
+            width: 70%;
+            
+            .LOGIN-FIELD-USER
+            {
+    
+            }
+    
+            .LOGIN-FIELD-PASSWORD
+            {
+                margin-top: 1rem;
+            }
+    
+            .LOGIN-OPTIONS 
+            {
+                display: flex;
+                flex-direction: row;
+                margin-top: 2rem;
+                gap: 1rem;
+                font-size: 2rem;
+    
+                .LOGIN-BUTTON-ENTER
+                {
+                    min-width: 0rem;
+                    min-height: 0rem;
+                    width: 4rem;
+                    height: 3rem;
+                }
+            }
+        }
+
+        .LOGIN-FORGOT-PASSWORD
+        {
+            margin-top: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
