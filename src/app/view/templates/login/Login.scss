@@ -56,30 +56,40 @@
                 margin-top: 1rem;
             }
     
-            .LOGIN-OPTIONS 
+            .LOGIN-OPTIONS
             {
-                display: flex;
-                flex-direction: row;
                 margin-top: 2rem;
-                gap: 1rem;
-                font-size: 2rem;
-    
-                .LOGIN-BUTTON-ENTER
+
+                .LOGIN-BUTTON 
                 {
-                    min-width: 0rem;
-                    min-height: 0rem;
-                    width: 4rem;
-                    height: 3rem;
+                    display: flex;
+                    flex-direction: row;
+                    gap: 1rem;
+                    font-size: 2rem;
+        
+                    .LOGIN-BUTTON-ENTER
+                    {
+                        min-width: 0rem;
+                        min-height: 0rem;
+                        width: 4rem;
+                        height: 3rem;
+                    }
+                }
+
+                .LOGIN-FORGOT-PASSWORD
+                {
+                    margin-top: 2rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                 }
             }
-        }
-
-        .LOGIN-FORGOT-PASSWORD
-        {
-            margin-top: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            
+            .LOGIN-LOADER 
+            {
+                margin-top: 4rem;
+                text-align: center;
+            }
         }
     }
 }
