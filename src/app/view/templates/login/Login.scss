@@ -45,15 +45,16 @@
         {
             margin-top: 3rem;
             width: 70%;
-            
-            .LOGIN-FIELD-USER
-            {
-    
-            }
-    
+                
             .LOGIN-FIELD-PASSWORD
             {
                 margin-top: 1rem;
+            }
+
+            .LOGIN-VALIDATION 
+            {
+                margin-top: 0.5rem;
+                color: red;
             }
     
             .LOGIN-OPTIONS

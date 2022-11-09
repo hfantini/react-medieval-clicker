@@ -5,61 +5,56 @@ import LoginIcon from '@mui/icons-material/Login';
 import { Link, useNavigate } from 'react-router-dom';
 import Loader from '../../components/loader/Loader';
 import InfoDialog from '../../components/infoDialog/InfoDialog';
+import { useForm } from 'react-hook-form';
+import AccountService from '../../../service/AccountService';
 
 function Login() 
 {
+  const accountService:AccountService = new AccountService();
   const navigate = useNavigate();
-  const [formState, setFormState] = useState(
-  {
-      values: 
-      {
-        user: "User",
-        pass: "Password"
-      },
-      errors: {}
-  });
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const [processing, setProcessing] = useState<boolean>(false)
-  const [completed, setCompleted] = useState( {
+  const [asyncProcessState, setAsyncProcessState] = useState<AsyncProcessState>( {
     complete: false,
     success: false,
     message: ""
   }) 
 
-  const handleValidation = () =>
-  {
-
-  }
-
-  const handleChange = () => 
-  {
-
-  }
-
-  const onFormSubmit = (e:React.FormEvent<HTMLFormElement>) => 
-  {
-    e.preventDefault();
-
-    setCompleted({
-      complete: true,
-      success: false,
-      message: "teste123"
-    })
-  }
-
   const onDialogCloseClick = () =>
   {
-    setCompleted({
-      ...completed,
+    setAsyncProcessState({
+      ...asyncProcessState,
       complete: false
     });
   }
 
   const onModalClose = () =>
   {
-    setCompleted({
-      ...completed,
+    setAsyncProcessState({
+      ...asyncProcessState,
       complete: false
     });
+  }
+
+  const onFormSubmit = (data:any) =>
+  {
+    setProcessing(true);
+    accountService.login(data.email, data.password).then( (account:Account) => 
+    {
+      setTimeout(() => {
+        navigate("/game", {replace: true})
+      }, 1000);
+    }).catch( (e) => 
+    {
+      setProcessing(false);
+      setAsyncProcessState(
+        {
+          complete: true,
+          success: false,
+          message: e
+        }
+      )
+    })
   }
 
   return (
@@ -73,23 +68,35 @@ function Login()
         </div>
       </div>
       <div className="LOGIN-CONTENT">
-        <form className='LOGIN-FORM' onSubmit={(evt) => onFormSubmit(evt)}>
+        <form className='LOGIN-FORM' onSubmit={handleSubmit(onFormSubmit)}>
           <div className="LOGIN-FIELD-USER">
             <TextField 
-              id="user" 
-              label={formState.values.user} 
+              id="email" 
+              label="Email" 
               variant="standard"
               disabled={processing}
+              {...register("email", {required: true})}
               fullWidth />
+            {errors.email &&
+              <div className="LOGIN-VALIDATION">
+                {errors.email.type == "required" && <div>This field if required</div>}
+              </div>
+            }
           </div>
           <div className="LOGIN-FIELD-PASSWORD">
             <TextField 
               id="password" 
               type="password"
-              label={formState.values.pass} 
+              label="Password"
               variant="standard" 
               disabled={processing}
+              {...register("password", {required: true})}
               fullWidth />
+            {errors.pass &&
+              <div className="LOGIN-VALIDATION">
+                {errors.pass.type == "required" && <div>This field if required</div>}
+              </div>
+            }
           </div>
           { !processing &&
             <div className="LOGIN-OPTIONS">
@@ -120,10 +127,10 @@ function Login()
           }        
         </form>
         <Modal
-          open={completed.complete && !completed.success}
+          open={asyncProcessState.complete && !asyncProcessState.success}
           onClose={onModalClose}>
             <InfoDialog onCloseClick={onDialogCloseClick}>
-              {completed.message}
+              {asyncProcessState.message}
             </InfoDialog>
         </Modal> 
       </div>

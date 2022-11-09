@@ -3,7 +3,7 @@ import React from 'react';
 import CloseIcon from "@mui/icons-material/Close";
 import { IconButton } from "@mui/material";
 
-function InfoDialog(props:any)
+const InfoDialog = React.forwardRef( (props:any, ref:any) => 
 {
     const onCloseClick = () =>
     {
@@ -14,7 +14,7 @@ function InfoDialog(props:any)
     }
 
     return (
-        <div className="DIALOG">
+        <div ref={ref} className="DIALOG">
             <div className="CONTENT">
                 {props.children}
             </div>
@@ -27,6 +27,6 @@ function InfoDialog(props:any)
             </div>
         </div>
     )
-}
+})
 
 export default InfoDialog;

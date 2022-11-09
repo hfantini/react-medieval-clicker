@@ -9,7 +9,7 @@ function Splash()
   setTimeout(() => setRedirectNow(true), 2000);
 
   return redirectNow ? (
-    <Navigate to="/login" replace={false} />
+    <Navigate to="/login" replace={true} />
   ) : (    
     <div className="SPLASH">
       <div className="SPLASH-WRAPPER">

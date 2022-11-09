@@ -1,10 +1,10 @@
 import './NewAccount.scss';
 import React, { useState } from 'react';
-import { Box, Button, Modal, TextField } from '@mui/material';
+import { Button, Modal, TextField } from '@mui/material';
 import Loader from '../../components/loader/Loader';
-import AccountRepository from '../../../repository/AccountRepository';
 import { useNavigate } from 'react-router-dom';
 import InfoDialog from '../../components/infoDialog/InfoDialog';
+import AccountService from '../../../service/AccountService';
 
 function NewAccount() 
 {
@@ -34,7 +34,7 @@ function NewAccount()
 
   let [processing, setProcessing] = useState<boolean>(false);
   let [complete, setComplete] = useState<boolean>(false);
-  let accountRepository = new AccountRepository();
+  let accountService:AccountService = new AccountService();
   const navigate = useNavigate();
 
   const validate = ():boolean =>
@@ -79,7 +79,7 @@ function NewAccount()
       retValue = false;
     }
 
-    if( accountRepository.exists(value) ) 
+    if( accountService.exists(value) ) 
     {
       valueError.push("This e-mail is already registered");
       retValue = false;
@@ -111,6 +111,12 @@ function NewAccount()
       retValue = false;
     }
 
+    // CHECK IF PASSWORDS MATCH
+    if(formState.values.password !== value) {
+      valueError.push("Passwords do not match")
+      retValue = false;
+    }
+
     newState.errors.passwordConfirm = [...valueError];
     setFormState(newState);
 
@@ -119,8 +125,8 @@ function NewAccount()
 
   const renderValidationErrors = (errors:Array<string>) => {
     let retValue: Array<any> = [];
-    errors.forEach( (value) => {
-      retValue.push(`- ${value}`)
+    errors.forEach( (value, index) => {
+      retValue.push(<li key={`li-naccount-${index}`}>{value}</li>)
     } )
     return retValue;
   }
@@ -144,7 +150,7 @@ function NewAccount()
 
     if (validate()) {
       setProcessing(true);
-      accountRepository.save({
+      accountService.save({
         name: formState.values.name,
         lastName: formState.values.lastName,
         email: formState.values.mail,
@@ -161,12 +167,12 @@ function NewAccount()
 
   const onModalClose = () => 
   {
-    navigate("/login", {replace: false})
+    navigate("/login", {replace: true})
   }
 
   const onDialogCloseClick = () => 
   {
-    navigate("/login", {replace: false})
+    navigate("/login", {replace: true})
   }  
 
   return (
