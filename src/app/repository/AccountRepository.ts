@@ -1,4 +1,5 @@
 import IRepository from "../interface/IRepository";
+import { Account } from "../model/Account";
 
 export default class AccountRepository implements IRepository<Account> {
 

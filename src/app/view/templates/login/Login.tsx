@@ -7,6 +7,7 @@ import Loader from '../../components/loader/Loader';
 import InfoDialog from '../../components/infoDialog/InfoDialog';
 import { useForm } from 'react-hook-form';
 import AccountService from '../../../service/AccountService';
+import { Account } from '../../../model/Account';
 
 function Login() 
 {

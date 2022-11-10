@@ -6,26 +6,35 @@ import InfoDialog from '../../components/infoDialog/InfoDialog';
 import Loader from '../../components/loader/Loader';
 import GameUI from './game-ui/GameUI';
 import AccountService from '../../../service/AccountService';
-import GameService from '../../../service/GameService';
+import { Account } from '../../../model/Account';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../store';
+import { Resources } from '../../../model/Resources';
 
 function Game() 
 {
   const accountService = new AccountService();
-  const gameService = new GameService();
+  
   const requestRef = React.useRef<number>()
   const requestLoadRef = React.useRef<boolean>(false);
   const accountRef = React.useRef<Account>(null);
+
   const [asyncProcessState, setAsyncProcessState] = useState<AsyncProcessState>({
     complete: false,
     success: false,
     message: null
   })
+
   const navigate = useNavigate();
   
-  useEffect(() => {
+  useEffect(() => 
+  {
     requestRef.current = requestAnimationFrame(update);
-    load().then( () =>
+
+    load().then( (account) =>
     {
+      accountRef.current = account;
+
       setTimeout(() => {
         setAsyncProcessState({
           ...asyncProcessState,
@@ -46,9 +55,19 @@ function Game()
     return () => cancelAnimationFrame(requestRef.current);
   }, [])
 
-  const load = ():Promise<void> =>
+  let dispatch = useDispatch();
+  let resources = useSelector((state:RootState) => {
+    if(accountRef.current != null)
+    {
+      console.log(accountRef.current)
+      accountRef.current.game.resources = new Resources(state.resources.food, state.resources.wood, state.resources.gold, state.resources.stone)
+    }
+    return state.resources;
+  })
+
+  const load = (): Promise<Account> =>
   {
-    return new Promise<void>( (resolve, reject) =>
+    return new Promise<Account>( (resolve, reject) =>
     {
       try
       {
@@ -60,13 +79,7 @@ function Game()
 
         accountService.load(id).then( (account) =>
         {
-          accountRef.current = account;
-
-          if(accountRef.current.gameProgress == null){
-            accountRef.current.gameProgress = gameService.newGame();
-          }
-
-          resolve();
+          resolve(account);
         } );
       } 
       catch(e)
@@ -76,10 +89,16 @@ function Game()
     })
   }
 
+  const save = (): Promise<void> =>
+  {
+    return null;
+  }
+
   const update = (time:number) => 
   {
-    if(requestLoadRef.current) {
-      
+    if(requestLoadRef.current && accountRef.current) 
+    {
+
     }
 
     requestRef.current = requestAnimationFrame(update);

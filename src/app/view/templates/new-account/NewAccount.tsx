@@ -5,6 +5,7 @@ import Loader from '../../components/loader/Loader';
 import { useNavigate } from 'react-router-dom';
 import InfoDialog from '../../components/infoDialog/InfoDialog';
 import AccountService from '../../../service/AccountService';
+import { Account } from '../../../model/Account';
 
 function NewAccount() 
 {
@@ -150,12 +151,8 @@ function NewAccount()
 
     if (validate()) {
       setProcessing(true);
-      accountService.save({
-        name: formState.values.name,
-        lastName: formState.values.lastName,
-        email: formState.values.mail,
-        password: formState.values.password,
-      }).then( () => 
+      let account = new Account(formState.values.name, formState.values.lastName, formState.values.mail, formState.values.password);
+      accountService.save(account).then( () => 
       {
         setTimeout(() => {
           setProcessing(false);

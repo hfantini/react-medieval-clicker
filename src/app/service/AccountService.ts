@@ -1,3 +1,4 @@
+import { Account } from "../model/Account";
 import AccountRepository from "../repository/AccountRepository";
 
 export default class AccountService
