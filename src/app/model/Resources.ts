@@ -1,21 +1,16 @@
 class Resources
 {
-    public _food: number = 0;
-    public _wood: number = 0;
-    public _gold: number = 0;
-    public _stone: number = 0;
+    private _food: number = 0;
+    private _wood: number = 0;
+    private _gold: number = 0;
+    private _stone: number = 0;
 
-    public constructor(
-        food: number = 0, 
-        wood: number = 0, 
-        gold: number = 0, 
-        stone: number = 0
-    )
+    public constructor(obj:any)
     {
-        this._food = food;
-        this._wood = wood;
-        this._gold = gold;
-        this._stone = stone;
+        this._food = obj?._food | 0;
+        this._wood = obj?._wood | 0;
+        this._gold = obj?._gold | 0;
+        this._stone = obj?._stone | 0;
     }
 
     public get food(): number

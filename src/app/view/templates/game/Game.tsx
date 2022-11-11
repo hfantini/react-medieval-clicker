@@ -9,40 +9,45 @@ import AccountService from '../../../service/AccountService';
 import { Account } from '../../../model/Account';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
-import { Resources } from '../../../model/Resources';
+import { set } from '../../../state/resources/ResourcesSlicer';
+import GameService from '../../../service/GameSerivce';
 
 function Game() 
 {
   const accountService = new AccountService();
-  
-  const requestRef = React.useRef<number>()
+  const gameService = new GameService();
   const requestLoadRef = React.useRef<boolean>(false);
   const accountRef = React.useRef<Account>(null);
-
   const [asyncProcessState, setAsyncProcessState] = useState<AsyncProcessState>({
     complete: false,
     success: false,
     message: null
   })
-
   const navigate = useNavigate();
-  
+  let intervalRef:any = 0;
+
+  const dispatch = useDispatch();
+
+  const resources = useSelector((state:RootState) => {
+    return state.resources;
+  })
+
   useEffect(() => 
   {
-    requestRef.current = requestAnimationFrame(update);
+    intervalRef = setInterval(update, 60);
 
     load().then( (account) =>
     {
       accountRef.current = account;
 
-      setTimeout(() => {
+      setInterval(() => {
         setAsyncProcessState({
           ...asyncProcessState,
           complete: true,
           success: true
         })
         requestLoadRef.current = true;
-      }, 1000);
+      }, 3000);
       
     }).catch( (e) =>
     {
@@ -52,18 +57,10 @@ function Game()
         message: e
       })
     });
-    return () => cancelAnimationFrame(requestRef.current);
-  }, [])
-
-  let dispatch = useDispatch();
-  let resources = useSelector((state:RootState) => {
-    if(accountRef.current != null)
-    {
-      console.log(accountRef.current)
-      accountRef.current.game.resources = new Resources(state.resources.food, state.resources.wood, state.resources.gold, state.resources.stone)
+    return () => {
+      clearInterval(intervalRef);
     }
-    return state.resources;
-  })
+  }, [])
 
   const load = (): Promise<Account> =>
   {
@@ -89,19 +86,30 @@ function Game()
     })
   }
 
-  const save = (): Promise<void> =>
+  const save = (account:Account): Promise<Account> =>
   {
-    return null;
+    account.game.lastSaveTimestamp = Date.now();
+    return accountService.save(account);
   }
 
-  const update = (time:number) => 
+  const update = () => 
   {
-    if(requestLoadRef.current && accountRef.current) 
+    if(accountRef.current) 
     {
+      accountRef.current.game = gameService.update(accountRef.current.game);
 
+      save(accountRef.current).then( (account:Account) =>
+      {
+        dispatch(set(
+          {
+            food: accountRef.current.game.resources.food, 
+            wood: accountRef.current.game.resources.wood, 
+            gold: accountRef.current.game.resources.gold, 
+            stone: accountRef.current.game.resources.stone
+          })
+        )
+      })
     }
-
-    requestRef.current = requestAnimationFrame(update);
   }
 
   const exit = () =>
@@ -128,6 +136,7 @@ function Game()
       }
       { asyncProcessState.complete &&
         <React.Fragment>
+          <div>FOOD: {Math.floor(resources.food)}</div>
           { asyncProcessState.success && 
             <GameUI></GameUI>
           }

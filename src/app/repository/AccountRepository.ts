@@ -12,7 +12,7 @@ export default class AccountRepository implements IRepository<Account> {
 
                 if(typeof id == "string" && window.localStorage.getItem(id) != null) 
                 {
-                    retValue = JSON.parse(window.localStorage.getItem(id));
+                    retValue = new Account( JSON.parse( window.localStorage.getItem(id) ) );
                 }
 
                 resolve(retValue);

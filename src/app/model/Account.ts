@@ -8,25 +8,13 @@ class Account
     private _password: string;
     private _game: Game;
 
-    public constructor
-    (
-        name: string = null, 
-        lastname: string = null, 
-        email: string = null,
-        password: string = null,
-        game: Game = null
-    )
+    public constructor(obj:any)
     {
-        this._name = name;
-        this._lastName = lastname;
-        this._email = email;
-        this._password = password;
-        this._game = game;
-
-        if(this._game == null)
-        {
-            this._game = new Game();
-        }
+        this._name = obj?._name;
+        this._lastName = obj?._lastname;
+        this._email = obj?._email;
+        this._password = obj?._password;
+        this._game = new Game(obj?._game);
     }
 
     public get name(): string

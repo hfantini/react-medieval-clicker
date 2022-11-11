@@ -151,7 +151,7 @@ function NewAccount()
 
     if (validate()) {
       setProcessing(true);
-      let account = new Account(formState.values.name, formState.values.lastName, formState.values.mail, formState.values.password);
+      let account = new Account( formState.values );
       accountService.save(account).then( () => 
       {
         setTimeout(() => {

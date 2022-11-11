@@ -2,12 +2,13 @@ import { Resources } from "./Resources";
 
 class Game
 {
-    public _lastSaveTimestamp: number;
-    public _resources: Resources = new Resources();
-
-    public constructor()
+    private _lastSaveTimestamp: number;
+    private _resources: Resources;
+    
+    public constructor(obj:any)
     {
-        this._resources = new Resources();
+        this._lastSaveTimestamp = obj?._lastSaveTimestamp;
+        this._resources = new Resources(obj?._resources);
     }
 
     public get lastSaveTimestamp(): number
@@ -15,7 +16,7 @@ class Game
         return this._lastSaveTimestamp;
     }
 
-    public set lastSabeTimestamp(lastSabeTimestamp: number)
+    public set lastSaveTimestamp(lastSabeTimestamp: number)
     {
         this._lastSaveTimestamp = lastSabeTimestamp;
     }

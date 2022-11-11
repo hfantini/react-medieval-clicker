@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
-import resourcesSlicer from './state/ResourcesSlicer';
+import ResourcesSlicer from './state/resources/ResourcesSlicer';
 
 export const store = configureStore({
   reducer: {
-    resources: resourcesSlicer
+    resources: ResourcesSlicer
   },
 })
 
