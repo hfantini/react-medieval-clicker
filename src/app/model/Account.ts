@@ -11,7 +11,7 @@ class Account
     public constructor(obj:any)
     {
         this._name = obj?._name;
-        this._lastName = obj?._lastname;
+        this._lastName = obj?._lastName;
         this._email = obj?._email;
         this._password = obj?._password;
         this._game = new Game(obj?._game);

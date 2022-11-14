@@ -7,10 +7,13 @@ import Loader from '../../components/loader/Loader';
 import GameUI from './game-ui/GameUI';
 import AccountService from '../../../service/AccountService';
 import { Account } from '../../../model/Account';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../store';
-import { set } from '../../../state/resources/ResourcesSlicer';
-import GameService from '../../../service/GameSerivce';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import GameService from '../../../service/GameService';
+import { RootState } from '../../../store/Store';
+import { set } from '../../../store/slicer/ResourceSlicer';
+import { UserActionPayload } from '../../../store/payload/UserActionPayload';
+import { UserAction } from '../../../enum/UserAction';
+import { userAction } from '../../../store/slicer/UserActionSlicer';
 
 function Game() 
 {
@@ -18,6 +21,7 @@ function Game()
   const gameService = new GameService();
   const requestLoadRef = React.useRef<boolean>(false);
   const accountRef = React.useRef<Account>(null);
+  const userActionRef = React.useRef<UserActionPayload>(null);
   const [asyncProcessState, setAsyncProcessState] = useState<AsyncProcessState>({
     complete: false,
     success: false,
@@ -27,10 +31,10 @@ function Game()
   let intervalRef:any = 0;
 
   const dispatch = useDispatch();
-
-  const resources = useSelector((state:RootState) => {
-    return state.resources;
-  })
+  const state = useSelector((state:RootState) => {
+    userActionRef.current = state.userAction;
+    return state;
+  }, shallowEqual)
 
   useEffect(() => 
   {
@@ -96,17 +100,46 @@ function Game()
   {
     if(accountRef.current) 
     {
+      //CHECKING FOR USERS ACTION
+
+      switch(userActionRef.current.action)
+      {
+        case UserAction.INCREMENT_FOOD:
+          accountRef.current.game.resources.food += userActionRef.current.value;
+          dispatch(userAction({action: UserAction.NONE, value: 0}))
+          break;
+
+        case UserAction.INCREMENT_WOOD:
+          accountRef.current.game.resources.wood += userActionRef.current.value;
+          dispatch(userAction({action: UserAction.NONE, value: 0}))
+          break;
+            
+        case UserAction.INCREMENT_STONE:
+          accountRef.current.game.resources.stone += userActionRef.current.value;
+          dispatch(userAction({action: UserAction.NONE, value: 0}))
+          break;
+      
+        case UserAction.INCREMENT_GOLD:
+          accountRef.current.game.resources.gold += userActionRef.current.value;
+          dispatch(userAction({action: UserAction.NONE, value: 0}))
+          break;              
+      }
+
+      // UPDATING OVER TIME
+
       accountRef.current.game = gameService.update(accountRef.current.game);
 
       save(accountRef.current).then( (account:Account) =>
       {
-        dispatch(set(
-          {
-            food: accountRef.current.game.resources.food, 
-            wood: accountRef.current.game.resources.wood, 
-            gold: accountRef.current.game.resources.gold, 
-            stone: accountRef.current.game.resources.stone
-          })
+        dispatch(
+          set(
+            {
+              food: account.game.resources.food, 
+              wood: account.game.resources.wood, 
+              gold: account.game.resources.gold, 
+              stone: account.game.resources.stone
+            }
+          )
         )
       })
     }
@@ -136,7 +169,6 @@ function Game()
       }
       { asyncProcessState.complete &&
         <React.Fragment>
-          <div>FOOD: {Math.floor(resources.food)}</div>
           { asyncProcessState.success && 
             <GameUI></GameUI>
           }

@@ -11,25 +11,25 @@ function NewAccount()
 {
   let [formState, setFormState] = useState({
     fields: {
-      name: {id: "name", label: "Name"},
-      lastName: {id: "lastName", label: "Last Name"},
-      mail: {id: "mail", label: "E-Mail"},
-      password: {id: "password", label: "Password"},
-      passwordConfirm: {id: "passwordConfirm", label: "Password Confirmation"},
+      name: {id: "_name", label: "Name"},
+      lastName: {id: "_lastName", label: "Last Name"},
+      mail: {id: "_email", label: "E-Mail"},
+      password: {id: "_password", label: "Password"},
+      passwordConfirm: {id: "_passwordConfirm", label: "Password Confirmation"},
     },
     values: {
-      name: "",
-      lastName: "",
-      mail: "",
-      password: "",
-      passwordConfirm: ""
+      _name: "",
+      _lastName: "",
+      _email: "",
+      _password: "",
+      _passwordConfirm: ""
     },
     errors: {
-      name: [],
-      lastName: [],
-      mail: [],
-      password: [],
-      passwordConfirm: [],
+      _name: [],
+      _lastName: [],
+      _email: [],
+      _password: [],
+      _passwordConfirm: [],
     }
   });
 
@@ -46,7 +46,7 @@ function NewAccount()
     // == NAME
     
     let valueError = [];
-    let value = formState.values.name;
+    let value = formState.values._name;
 
     if(value == null || value === "")
     {
@@ -54,12 +54,12 @@ function NewAccount()
       retValue = false;
     }
 
-    newState.errors.name = [...valueError];
+    newState.errors._name = [...valueError];
 
     // == LASTNAME
     
     valueError = [];
-    value = formState.values.lastName;
+    value = formState.values._lastName;
 
     if(value == null || value === "")
     {
@@ -67,12 +67,12 @@ function NewAccount()
       retValue = false;
     }
 
-    newState.errors.lastName = [...valueError];    
+    newState.errors._lastName = [...valueError];    
 
     // == MAIL
     
     valueError = [];
-    value = formState.values.mail;
+    value = formState.values._email;
 
     if(value == null || value === "")
     {
@@ -86,12 +86,12 @@ function NewAccount()
       retValue = false;
     }
 
-    newState.errors.mail = [...valueError];       
+    newState.errors._email = [...valueError];       
 
     // == PASSWORD
 
     valueError = [];
-    value = formState.values.password;
+    value = formState.values._password;
 
     if(value == null || value === "")
     {
@@ -99,12 +99,12 @@ function NewAccount()
       retValue = false;
     }
 
-    newState.errors.password = [...valueError];   
+    newState.errors._password = [...valueError];   
 
     // == PASSWORD CONFIRM
 
     valueError = [];
-    value = formState.values.passwordConfirm;
+    value = formState.values._passwordConfirm;
 
     if(value == null || value === "")
     {
@@ -113,12 +113,12 @@ function NewAccount()
     }
 
     // CHECK IF PASSWORDS MATCH
-    if(formState.values.password !== value) {
+    if(formState.values._password !== value) {
       valueError.push("Passwords do not match")
       retValue = false;
     }
 
-    newState.errors.passwordConfirm = [...valueError];
+    newState.errors._passwordConfirm = [...valueError];
     setFormState(newState);
 
     return retValue;
@@ -186,78 +186,78 @@ function NewAccount()
         <form className='NEWACCOUNT-FORM' onSubmit={(evt) => onFormSubmit(evt)}>
           <div className="NEWACCOUNT-NAME">
             <TextField 
-              id="name" 
+              id="_name" 
               label={formState.fields.name.label} 
               variant="standard" 
               fullWidth
-              value={formState.values.name}
+              value={formState.values._name}
               disabled={processing}
               onChange={(evt) => onFieldChange(evt)}/>
-              { formState.errors.name.length > 0 &&
+              { formState.errors._name.length > 0 &&
                 <div className="NEWACCOUNT-VALIDATION">
-                  {renderValidationErrors(formState.errors.name)}
+                  {renderValidationErrors(formState.errors._name)}
                 </div>
               }
           </div>
           <div className="NEWACCOUNT-LASTNAME">
             <TextField 
-              id="lastName" 
+              id="_lastName" 
               label={formState.fields.lastName.label} 
               variant="standard" 
               fullWidth
-              value={formState.values.lastName}
+              value={formState.values._lastName}
               disabled={processing}
               onChange={(evt) => onFieldChange(evt)}/>
-              { formState.errors.lastName.length > 0 &&
+              { formState.errors._lastName.length > 0 &&
                 <div className="NEWACCOUNT-VALIDATION">
-                  {renderValidationErrors(formState.errors.lastName)}
+                  {renderValidationErrors(formState.errors._lastName)}
                 </div>
               }              
           </div>          
           <div className="NEWACCOUNT-MAIL">
             <TextField 
-              id="mail" 
+              id="_email" 
               label={formState.fields.mail.label} 
               variant="standard" 
               fullWidth
-              value={formState.values.mail}
+              value={formState.values._email}
               disabled={processing}
               onChange={(evt) => onFieldChange(evt)}/>
-              { formState.errors.mail.length > 0 &&
+              { formState.errors._email.length > 0 &&
                 <div className="NEWACCOUNT-VALIDATION">
-                  {renderValidationErrors(formState.errors.mail)}
+                  {renderValidationErrors(formState.errors._email)}
                 </div>
               }                       
           </div>          
           <div className="NEWACCOUNT-PASSWORD">
             <TextField 
-              id="password" 
+              id="_password" 
               type="password"
               label={formState.fields.password.label} 
               variant="standard" 
               fullWidth
-              value={formState.values.password}
+              value={formState.values._password}
               disabled={processing}
               onChange={(evt) => onFieldChange(evt)}/>
-              { formState.errors.password.length > 0 &&
+              { formState.errors._password.length > 0 &&
                 <div className="NEWACCOUNT-VALIDATION">
-                  {renderValidationErrors(formState.errors.password)}
+                  {renderValidationErrors(formState.errors._password)}
                 </div>
               }                
           </div>
           <div className="NEWACCOUNT-PASSWORD-CONFIRM">
             <TextField 
-              id="passwordConfirm" 
+              id="_passwordConfirm" 
               type="password"
               label={formState.fields.passwordConfirm.label} 
               variant="standard" 
               fullWidth
-              value={formState.values.passwordConfirm}
+              value={formState.values._passwordConfirm}
               disabled={processing}
               onChange={(evt) => onFieldChange(evt)}/>
-              { formState.errors.passwordConfirm.length > 0 &&
+              { formState.errors._passwordConfirm.length > 0 &&
                 <div className="NEWACCOUNT-VALIDATION">
-                  {renderValidationErrors(formState.errors.passwordConfirm)}
+                  {renderValidationErrors(formState.errors._passwordConfirm)}
                 </div>
               }                     
           </div>

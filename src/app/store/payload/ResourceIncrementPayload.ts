@@ -1,9 +1,9 @@
 import { ResourceType } from "../../enum/ResourceType"
 
-type IncrementResourcesPayload =
+type ResourceIncrementPayload =
 {
     resource:ResourceType,
     value:number
 }
 
-export {IncrementResourcesPayload}
+export {ResourceIncrementPayload}

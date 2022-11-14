@@ -1,0 +1,44 @@
+.GAME-RESOURCE
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .GAME-RESOURCE-VALUE
+    {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .GAME-RESOURCE-BUTTON
+    {
+        width: 4rem;
+        height: 4rem;
+        border: 0.0625rem solid;
+        margin-top: 0.625rem;
+        background-size: 3rem 3rem;
+        background-repeat: no-repeat;
+        background-position: center center;
+
+        &.type-0
+        {
+            background-image: url("./assets/icon_food.webp");
+        }
+
+        &.type-1
+        {
+            background-image: url("./assets/icon_wood.webp");
+        }
+        
+        &.type-2
+        {
+            background-image: url("./assets/icon_gold.webp");
+        }
+        
+        &.type-3
+        {
+            background-image: url("./assets/icon_stone.webp");
+        }        
+    }
+}

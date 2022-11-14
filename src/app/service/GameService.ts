@@ -1,6 +1,4 @@
-import { Account } from "../model/Account";
 import { Game } from "../model/Game";
-import AccountRepository from "../repository/AccountRepository";
 
 export default class GameService
 {
@@ -11,8 +9,9 @@ export default class GameService
         
     }
 
-    update(game:Game): Game {
-
+    update(game:Game): Game 
+    {
+        let retValue:Game = new Game(game);
         let timeMultiplier = 1;
         let timeSinceLastSave = Date.now() - game.lastSaveTimestamp;
         if(Date.now() - game.lastSaveTimestamp > 1000)
@@ -25,11 +24,11 @@ export default class GameService
             }
         }
 
-        game.resources.food += this.factor * timeMultiplier;
-        game.resources.wood += this.factor * timeMultiplier;
-        game.resources.gold += this.factor * timeMultiplier;
-        game.resources.stone += this.factor * timeMultiplier;
+        retValue.resources.food = (game.resources.food + (this.factor * timeMultiplier));
+        retValue.resources.wood = (game.resources.wood + (this.factor * timeMultiplier));
+        retValue.resources.gold = (game.resources.gold + (this.factor * timeMultiplier));
+        retValue.resources.stone = (game.resources.stone + (this.factor * timeMultiplier));
 
-        return game;
+        return retValue;
     }
 }
