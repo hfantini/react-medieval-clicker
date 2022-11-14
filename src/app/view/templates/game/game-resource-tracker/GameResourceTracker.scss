@@ -1,0 +1,65 @@
+.GAME-RESOURCE-TRACKER
+{
+   width: 100%;
+   height: 100%;
+   display: flex;
+   flex-direction: row;
+   
+   .GAME-RESOURCE-TRACKER-CONTAINER 
+   {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 0.0625rem solid #561b09;
+      flex-grow: 1;
+      gap: 0.5rem;
+
+      .GAME-RESOURCE-TRACKER-ICON
+      {
+         width: 1.5rem;
+         height: 1.5rem;
+         background-size: 1.5rem 1.5rem;
+         background-repeat: no-repeat;
+         margin-top: 0.625rem;
+      }
+
+      .GAME-RESOURCE-TRACKER-VALUE
+      {
+         margin-top: 0.5rem;
+         font-size: 1.2rem;
+      }
+
+      &.GAME-RESOURCE-TRACKER-FOOD
+      {
+         .GAME-RESOURCE-TRACKER-ICON
+         {
+            background-image: url("../../../../../assets/images/icon_food.jpeg");
+         }
+      }
+
+      &.GAME-RESOURCE-TRACKER-WOOD
+      {
+         .GAME-RESOURCE-TRACKER-ICON
+         {
+            background-image: url("../../../../../assets/images/icon_wood.jpeg");
+         }
+      }    
+      
+      &.GAME-RESOURCE-TRACKER-GOLD
+      {
+         .GAME-RESOURCE-TRACKER-ICON
+         {
+            background-image: url("../../../../../assets/images/icon_gold.jpeg");
+         }
+      }          
+
+      &.GAME-RESOURCE-TRACKER-STONE
+      {
+         .GAME-RESOURCE-TRACKER-ICON
+         {
+            background-image: url("../../../../../assets/images/icon_stone.jpeg");
+         }
+      }          
+   }
+}

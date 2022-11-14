@@ -23,22 +23,52 @@
 
         &.type-0
         {
-            background-image: url("./assets/icon_food.webp");
+            background-image: url("../../../../../assets/images/icon_food.jpeg");
         }
 
         &.type-1
         {
-            background-image: url("./assets/icon_wood.webp");
+            background-image: url("../../../../../assets/images/icon_wood.jpeg");
         }
         
         &.type-2
         {
-            background-image: url("./assets/icon_gold.webp");
+            background-image: url("../../../../../assets/images/icon_gold.jpeg");
         }
         
         &.type-3
         {
-            background-image: url("./assets/icon_stone.webp");
+            background-image: url("../../../../../assets/images/icon_stone.jpeg");
         }        
+    }
+
+    .GAME-RESOURCE-VILLAGER
+    {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+    .GAME-RESOURCE-CONTROL
+    {
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+
+        .GAME-RESOURCE-BUTTON
+        {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 1.25rem;
+            height: 1.25rem;
+            svg
+            {
+                width: 0.85rem;
+                height: 0.85rem;
+            }
+        }
     }
 }

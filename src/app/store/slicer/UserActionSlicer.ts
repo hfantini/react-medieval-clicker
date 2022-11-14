@@ -13,7 +13,6 @@ export const userActionSlicer = createSlice({
     {
         userAction(state, action) 
         {
-            console.log(action);
             let payload = (action.payload as UserActionPayload);
             state.action = payload.action;
             state.value = payload.value

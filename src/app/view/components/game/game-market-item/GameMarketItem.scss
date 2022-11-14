@@ -1,0 +1,80 @@
+.GAME-MARKET-ITEM
+{
+    width: 100%;
+    height: 64px;
+    border: 1px solid #561b09;
+    display: flex;
+    flex-direction: row;
+    
+    .GAME-MARKET-ITEM-ICON
+    {
+        width: 64px;
+        height: 100%;
+        border-right: 1px solid #561b09;
+
+        img 
+        {
+            width: 64px;
+            height: 64px;
+        }
+    }
+
+    .GAME-MARKET-ITEM-MIDDLE
+    {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        padding-left: 1rem;
+
+        .GAME-MARKET-ITEM-TITLE
+        {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            font-size: 1rem;
+        }
+
+        .GAME-MARKET-ITEM-PRICE
+        {
+            flex-grow: 1;
+            font-size: 0.8rem;
+            display: flex;
+            flex-direction: row;
+
+            .GAME-MARKET-ITEM-PRICE-CONTAINER
+            {
+                flex-grow: 1;
+                display: flex;
+                flex-direction: row;
+                gap: 0.5rem;
+
+                img
+                {
+                    width: 24px;
+                    height: 24px;
+                }
+            }
+
+            .GAME-MARKET-ITEM-PRICE-CONTAINER-VALUE
+            {
+                
+            }
+        }        
+    }
+
+    .GAME-MARKET-ITEM-OPTIONS
+    {
+        width: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-left: 1px solid #561b09;
+            
+        svg
+        {
+            width: 24px;
+            height: 24px;
+        }
+    }    
+}

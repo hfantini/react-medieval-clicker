@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ResourceType } from "../../enum/ResourceType";
 import { Resources } from "../../model/Resources";
-import { ResourceIncrementPayload } from "../payload/ResourceIncrementPayload";
 
 export const resourceSlicer = createSlice({
     name: "ResourceSlicer",

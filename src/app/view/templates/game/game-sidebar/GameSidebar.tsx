@@ -2,13 +2,10 @@ import './GameSidebar.scss';
 import React, { useEffect } from 'react';
 import PaidIcon from '@mui/icons-material/Paid';
 import ManageHistoryIcon from '@mui/icons-material/ManageHistory';
+import StoreIcon from '@mui/icons-material/Store';
 
 function GameSidebar(props:any) 
-{
-  useEffect(() => {
-    console.log(props);
-  }, [])
-  
+{  
   const onItemClick = (value:any) =>
   {
     props.onSelect(value);
@@ -22,6 +19,13 @@ function GameSidebar(props:any)
       >
         <PaidIcon/>
       </div>
+
+      <div id=""
+           className = {`GAME-SIDEBAR-BUTTON ${props.selected == 'market' ? "SELECTED" : ''}`}
+           onClick={(evt) => onItemClick("market")}
+      >
+        <StoreIcon/>
+      </div>      
       
       <div id=""
            className ={`GAME-SIDEBAR-BUTTON ${props.selected == 'upgrades' ? "SELECTED" : ''}`}

@@ -1,8 +1,12 @@
 import './Loader.scss';
-import styled from 'styled-components';
+import React from 'react';
+import loader from "./assets/loader.svg"
 
-const Loader = styled.img`
-width: ${props => props.width ? props.width : "1rem"};
-height: ${props => props.height ? props.height : "1rem"};
-`
+function Loader(props:any) 
+{
+    return (
+        <img src={loader} style={ {width: props.width, height: props.height} } />
+    )
+}
+
 export default Loader;

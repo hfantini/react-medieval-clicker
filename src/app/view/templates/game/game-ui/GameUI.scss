@@ -4,20 +4,48 @@
     height: 100%;
     position: relative;
 
-    .GAME-UI-NAV
+    .GAME-UI-HEADER
     {
-        position: fixed;
-        left: 0px;
-        top: 0px;
-        bottom: 0px;
+        width: 100%;
+        height: 0rem;
+        overflow: hidden;
+        transition: height 300ms;
     }
 
-    .GAME-UI-PAGE
+    .GAME-UI-CONTENT
     {
-        position: fixed;
-        left: 5rem;
-        right: 0px;
-        top: 0px;
-        bottom: 0px;
+        height: 100%;
+        position: relative;
+        transition: 300ms;
+
+        .GAME-UI-NAV
+        {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            bottom: 0px;
+        }
+    
+        .GAME-UI-PAGE
+        {
+            position: absolute;
+            left: 5rem;
+            right: 1rem;
+            top: 1rem;
+            bottom: 1rem;
+        }
+    }
+
+    &.TRACK-RESOURCES
+    {
+        .GAME-UI-HEADER
+        {
+            height: 4rem;
+        }
+
+        .GAME-UI-CONTENT
+        {
+            height: calc(100% - 4rem);
+        }
     }
 }

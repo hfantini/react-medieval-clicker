@@ -10,10 +10,12 @@ import { Account } from '../../../model/Account';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import GameService from '../../../service/GameService';
 import { RootState } from '../../../store/Store';
-import { set } from '../../../store/slicer/ResourceSlicer';
+import { set as setResources } from '../../../store/slicer/ResourceSlicer';
+import { set as setVillagers } from '../../../store/slicer/VillagerSlicer';
 import { UserActionPayload } from '../../../store/payload/UserActionPayload';
 import { UserAction } from '../../../enum/UserAction';
 import { userAction } from '../../../store/slicer/UserActionSlicer';
+import { MarketItem } from '../../../model/MarketItem';
 
 function Game() 
 {
@@ -102,42 +104,34 @@ function Game()
     {
       //CHECKING FOR USERS ACTION
 
-      switch(userActionRef.current.action)
-      {
-        case UserAction.INCREMENT_FOOD:
-          accountRef.current.game.resources.food += userActionRef.current.value;
-          dispatch(userAction({action: UserAction.NONE, value: 0}))
-          break;
-
-        case UserAction.INCREMENT_WOOD:
-          accountRef.current.game.resources.wood += userActionRef.current.value;
-          dispatch(userAction({action: UserAction.NONE, value: 0}))
-          break;
-            
-        case UserAction.INCREMENT_STONE:
-          accountRef.current.game.resources.stone += userActionRef.current.value;
-          dispatch(userAction({action: UserAction.NONE, value: 0}))
-          break;
-      
-        case UserAction.INCREMENT_GOLD:
-          accountRef.current.game.resources.gold += userActionRef.current.value;
-          dispatch(userAction({action: UserAction.NONE, value: 0}))
-          break;              
-      }
+      accountRef.current.game = gameService.actionUpdate(userActionRef.current, accountRef.current.game);
 
       // UPDATING OVER TIME
 
-      accountRef.current.game = gameService.update(accountRef.current.game);
+      accountRef.current.game = gameService.timeUpdate(accountRef.current.game);
 
       save(accountRef.current).then( (account:Account) =>
       {
+        dispatch(userAction({action: UserAction.NONE, value: 0}));
         dispatch(
-          set(
+          setResources(
             {
               food: account.game.resources.food, 
               wood: account.game.resources.wood, 
               gold: account.game.resources.gold, 
               stone: account.game.resources.stone
+            }
+          )
+        )
+        dispatch( setVillagers(
+            {
+              idle: account.game.villagers.idle,
+              alloc: {
+                food: account.game.villagers.alloc.food,
+                wood: account.game.villagers.alloc.wood,
+                gold: account.game.villagers.alloc.gold,
+                stone: account.game.villagers.alloc.stone
+              }
             }
           )
         )

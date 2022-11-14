@@ -4,6 +4,9 @@ enum UserAction {
     INCREMENT_WOOD = 1,
     INCREMENT_GOLD = 2,
     INCREMENT_STONE = 3,
+    BUY_ITEM = 4,
+    PUT_VILLAGER_TO_WORK = 5,
+    PUT_VILLAGER_TO_REST = 6
 }
 
 export {UserAction}
