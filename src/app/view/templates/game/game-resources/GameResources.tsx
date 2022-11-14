@@ -1,10 +1,12 @@
 import './GameResources.scss';
 import React from 'react';
 import AccessibilityIcon from '@mui/icons-material/Accessibility';
+import AgricultureIcon from '@mui/icons-material/Agriculture';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../store/Store';
 import GameResource from '../../../components/game/game-resource/GameResource';
 import { ResourceType } from '../../../../enum/ResourceType';
+
 
 
 function GameResources() {
@@ -19,7 +21,8 @@ function GameResources() {
         Resources
       </div>
       <div className="GAME-RESOURCES-VILLAGERS">
-        <AccessibilityIcon/> {game.villager.idle}
+        <div className="GAME-RESOURCES-VILLAGERS-CONTAINER"><AccessibilityIcon/> {game.villager.idle}</div>
+        <div className="GAME-RESOURCES-VILLAGERS-CONTAINER"><AgricultureIcon/> {game.wagon.idle}</div>
       </div>
       <div className="GAME-RESOURCES-CONTENT">
         <div className="GAME-RESOURCES-ROW">

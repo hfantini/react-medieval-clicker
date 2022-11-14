@@ -17,7 +17,7 @@ function GameMarket()
     (
       {
         name: "Villager", 
-        desc: "+0.1f", 
+        desc: "+0.01f", 
         icon: IconVillager, 
         price: 
         [
@@ -31,7 +31,7 @@ function GameMarket()
     (
       {
         name: "Wagon", 
-        desc: "+0.5f", 
+        desc: "+0.05f", 
         icon: IconWagon, 
         price: 
         [

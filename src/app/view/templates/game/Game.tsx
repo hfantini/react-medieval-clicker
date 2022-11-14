@@ -12,10 +12,10 @@ import GameService from '../../../service/GameService';
 import { RootState } from '../../../store/Store';
 import { set as setResources } from '../../../store/slicer/ResourceSlicer';
 import { set as setVillagers } from '../../../store/slicer/VillagerSlicer';
+import { set as setWagons } from '../../../store/slicer/WagonSlicer';
 import { UserActionPayload } from '../../../store/payload/UserActionPayload';
 import { UserAction } from '../../../enum/UserAction';
 import { userAction } from '../../../store/slicer/UserActionSlicer';
-import { MarketItem } from '../../../model/MarketItem';
 
 function Game() 
 {
@@ -125,16 +125,28 @@ function Game()
         )
         dispatch( setVillagers(
             {
-              idle: account.game.villagers.idle,
+              idle: account.game.work.villagers.idle,
               alloc: {
-                food: account.game.villagers.alloc.food,
-                wood: account.game.villagers.alloc.wood,
-                gold: account.game.villagers.alloc.gold,
-                stone: account.game.villagers.alloc.stone
+                food: account.game.work.villagers.alloc.food,
+                wood: account.game.work.villagers.alloc.wood,
+                gold: account.game.work.villagers.alloc.gold,
+                stone: account.game.work.villagers.alloc.stone
               }
             }
           )
         )
+        dispatch( setWagons(
+            {
+              idle: account.game.work.wagons.idle,
+              alloc: {
+                food: account.game.work.wagons.alloc.food,
+                wood: account.game.work.wagons.alloc.wood,
+                gold: account.game.work.wagons.alloc.gold,
+                stone: account.game.work.wagons.alloc.stone
+              }
+            }
+          )
+        )        
       })
     }
   }
@@ -180,3 +192,4 @@ function Game()
 }
 
 export default Game;
+

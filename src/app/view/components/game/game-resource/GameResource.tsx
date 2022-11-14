@@ -8,6 +8,7 @@ import { userAction } from '../../../../store/slicer/UserActionSlicer';
 import PersonIcon from '@mui/icons-material/Person';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import AgricultureIcon from '@mui/icons-material/Agriculture';
 
 function GameResource(props:any) {
 
@@ -55,7 +56,7 @@ function GameResource(props:any) {
     }
   }
 
-  const onAddClick = () =>
+  const onAddVillagerClick = () =>
   {
     dispatch(userAction(
       {
@@ -68,7 +69,7 @@ function GameResource(props:any) {
     )
   }
 
-  const onRemoveClick = () =>
+  const onRemoveVillagerClick = () =>
   {
     dispatch(userAction(
       {
@@ -81,26 +82,63 @@ function GameResource(props:any) {
     )
   }  
 
+  const onAddWagonClick = () =>
+  {
+    dispatch(userAction(
+      {
+        action: UserAction.PUT_WAGON_TO_WORK,
+        value: {
+          resource: props.type,
+          value: 1
+        }
+      })
+    )
+  }
+
+  const onRemoveWagonClick = () =>
+  {
+    dispatch(userAction(
+      {
+        action: UserAction.PUT_WAGON_TO_REST,
+        value: {
+          resource: props.type,
+          value: 1
+        }
+      })
+    )
+  }    
+
   return (
     <div id={`game-resouce-${props.type}`} className="GAME-RESOURCE">
       <div className="GAME-RESOURCE-VALUE">
         {Math.floor(game.resource[convertResourceTypeToName(props.type)])}
       </div>
       <div 
-        className={`GAME-RESOURCE-BUTTON type-${props.type}`}
+        className={`GAME-RESOURCE-MANUAL-BUTTON type-${props.type}`}
         onClick={onResourceClick}>
       </div>
       <div className="GAME-RESOURCE-VILLAGER">
         <PersonIcon/> {game.villager.alloc[convertResourceTypeToName(props.type)]}
       </div>
-      <div className="GAME-RESOURCE-CONTROL">
-        <div className="GAME-RESOURCE-BUTTON" onClick={onAddClick}>
+      <div className="GAME-RESOURCE-VILLAGER-CONTROL">
+        <div className="GAME-RESOURCE-BUTTON" onClick={onAddVillagerClick}>
           <AddIcon/>
         </div>
-        <div className="GAME-RESOURCE-BUTTON" onClick={onRemoveClick}>
+        <div className="GAME-RESOURCE-BUTTON" onClick={onRemoveVillagerClick}>
           <RemoveIcon/>
         </div>
       </div>      
+      <div className="GAME-RESOURCE-WAGON">
+        <AgricultureIcon/> {game.wagon.alloc[convertResourceTypeToName(props.type)]}
+      </div>
+      <div className="GAME-RESOURCE-WAGON-CONTROL">
+        <div className="GAME-RESOURCE-BUTTON" onClick={onAddWagonClick}>
+          <AddIcon/>
+        </div>
+        <div className="GAME-RESOURCE-BUTTON" onClick={onRemoveWagonClick}>
+          <RemoveIcon/>
+        </div>
+      </div>          
     </div>
   );
 }

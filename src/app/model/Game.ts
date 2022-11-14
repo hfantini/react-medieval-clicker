@@ -1,17 +1,17 @@
 import { Resources } from "./Resources";
-import { Villagers } from "./Villagers";
+import { Work } from "./Work";
 
 class Game
 {
     private _lastSaveTimestamp: number;
     private _resources: Resources;
-    private _villagers: Villagers;
+    private _work: Work;
     
     public constructor(obj:any)
     {
         this._lastSaveTimestamp = obj?._lastSaveTimestamp;
         this._resources = new Resources(obj?._resources);
-        this._villagers = new Villagers(obj?._villagers);
+        this._work = new Work(obj?._work);
     }
 
     public get lastSaveTimestamp(): number
@@ -34,14 +34,14 @@ class Game
         this._resources = resources;
     }
 
-    public get villagers(): Villagers
+    public get work(): Work
     {
-        return this._villagers;
+        return this._work;
     }    
 
-    public set villagers(villagers: Villagers)
+    public set work(work: Work)
     {
-        this._villagers = villagers;
+        this._work = work;
     }    
 }
 

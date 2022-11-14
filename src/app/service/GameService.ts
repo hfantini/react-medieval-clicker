@@ -4,7 +4,7 @@ import { Game } from "../model/Game";
 import { MarketItem } from "../model/MarketItem";
 import { MarketPrice } from "../model/MarketPrice";
 import { UserActionPayload } from "../store/payload/UserActionPayload";
-import { VillagerWorkRestPayload } from "../store/payload/VillagerWorkRestPayload";
+import { WorkRestPayload } from "../store/payload/WorkRestPayload";
 
 export default class GameService
 {
@@ -114,10 +114,11 @@ export default class GameService
                         switch(item.name)
                         {
                             case "Villager":
-                                retValue.villagers.idle += 1;
+                                retValue.work.villagers.idle += 1;
                                 break;
 
                             case "Wagon":
+                                retValue.work.wagons.idle += 1;
                                 break;                                
                         }
                     }
@@ -131,69 +132,134 @@ export default class GameService
             break;
 
             case UserAction.PUT_VILLAGER_TO_WORK:
-                let villagerWorkPayload = actionPayload.value as VillagerWorkRestPayload;
-                if(retValue.villagers.idle >= villagerWorkPayload.value)
+                let villagerWorkPayload = actionPayload.value as WorkRestPayload;
+                if(retValue.work.villagers.idle >= villagerWorkPayload.value)
                 {
-                    retValue.villagers.idle -= villagerWorkPayload.value;
+                    retValue.work.villagers.idle -= villagerWorkPayload.value;
 
                     switch(villagerWorkPayload.resource)
                     {
                         case ResourceType.FOOD:
-                            retValue.villagers.alloc.food += villagerWorkPayload.value;
+                            retValue.work.villagers.alloc.food += villagerWorkPayload.value;
                             break;
 
                         case ResourceType.WOOD:
-                            retValue.villagers.alloc.wood += villagerWorkPayload.value;                                
+                            retValue.work.villagers.alloc.wood += villagerWorkPayload.value;                                
                             break;
 
                         case ResourceType.GOLD:
-                            retValue.villagers.alloc.gold += villagerWorkPayload.value;                                   
+                            retValue.work.villagers.alloc.gold += villagerWorkPayload.value;                                   
                             break;
 
                         case ResourceType.STONE:
-                            retValue.villagers.alloc.stone += villagerWorkPayload.value;                                   
+                            retValue.work.villagers.alloc.stone += villagerWorkPayload.value;                                   
                             break;
                     }
                 }
                 break;    
             
             case UserAction.PUT_VILLAGER_TO_REST:
-                let villagerRestPayload = actionPayload.value as VillagerWorkRestPayload;
+                let villagerRestPayload = actionPayload.value as WorkRestPayload;
                 switch(villagerRestPayload.resource)
                 {
                     case ResourceType.FOOD:
-                        if(retValue.villagers.alloc.food > 0)
+                        if(retValue.work.villagers.alloc.food > 0)
                         {
-                            retValue.villagers.alloc.food -= villagerRestPayload.value;
-                            retValue.villagers.idle += villagerRestPayload.value;
+                            retValue.work.villagers.alloc.food -= villagerRestPayload.value;
+                            retValue.work.villagers.idle += villagerRestPayload.value;
                         }
                         break;
 
                     case ResourceType.WOOD:
-                        if(retValue.villagers.alloc.wood)
+                        if(retValue.work.villagers.alloc.wood)
                         {
-                            retValue.villagers.alloc.wood -= villagerRestPayload.value;
-                            retValue.villagers.idle += villagerRestPayload.value;
+                            retValue.work.villagers.alloc.wood -= villagerRestPayload.value;
+                            retValue.work.villagers.idle += villagerRestPayload.value;
                         }
                         break;
 
                     case ResourceType.GOLD:
-                        if(retValue.villagers.alloc.gold)
+                        if(retValue.work.villagers.alloc.gold)
                         {
-                            retValue.villagers.alloc.gold -= villagerRestPayload.value;
-                            retValue.villagers.idle += villagerRestPayload.value;
+                            retValue.work.villagers.alloc.gold -= villagerRestPayload.value;
+                            retValue.work.villagers.idle += villagerRestPayload.value;
                         }
                         break;
 
                     case ResourceType.STONE:
-                        if(retValue.villagers.alloc.stone)
+                        if(retValue.work.villagers.alloc.stone)
                         {
-                            retValue.villagers.alloc.stone -= villagerRestPayload.value;
-                            retValue.villagers.idle += villagerRestPayload.value;
+                            retValue.work.villagers.alloc.stone -= villagerRestPayload.value;
+                            retValue.work.villagers.idle += villagerRestPayload.value;
                         }
                         break;
                 }
                 break;    
+
+                case UserAction.PUT_WAGON_TO_WORK:
+                let wagonWorkPayload = actionPayload.value as WorkRestPayload;
+                if(retValue.work.wagons.idle >= wagonWorkPayload.value)
+                {
+                    retValue.work.wagons.idle -= wagonWorkPayload.value;
+
+                    switch(wagonWorkPayload.resource)
+                    {
+                        case ResourceType.FOOD:
+                            retValue.work.wagons.alloc.food += wagonWorkPayload.value;
+                            break;
+
+                        case ResourceType.WOOD:
+                            retValue.work.wagons.alloc.wood += wagonWorkPayload.value;                                
+                            break;
+
+                        case ResourceType.GOLD:
+                            retValue.work.wagons.alloc.gold += wagonWorkPayload.value;                                   
+                            break;
+
+                        case ResourceType.STONE:
+                            retValue.work.wagons.alloc.stone += wagonWorkPayload.value;                                   
+                            break;
+                    }
+                }
+                break;    
+                
+                case UserAction.PUT_WAGON_TO_REST:
+                let wagonRestPayload = actionPayload.value as WorkRestPayload;
+                switch(wagonRestPayload.resource)
+                {
+                    case ResourceType.FOOD:
+                        if(retValue.work.wagons.alloc.food > 0)
+                        {
+                            retValue.work.wagons.alloc.food -= wagonRestPayload.value;
+                            retValue.work.wagons.idle += wagonRestPayload.value;
+                        }
+                        break;
+
+                    case ResourceType.WOOD:
+                        if(retValue.work.wagons.alloc.wood)
+                        {
+                            retValue.work.wagons.alloc.wood -= wagonRestPayload.value;
+                            retValue.work.wagons.idle += wagonRestPayload.value;
+                        }
+                        break;
+
+                    case ResourceType.GOLD:
+                        if(retValue.work.wagons.alloc.gold)
+                        {
+                            retValue.work.wagons.alloc.gold -= wagonRestPayload.value;
+                            retValue.work.wagons.idle += wagonRestPayload.value;
+                        }
+                        break;
+
+                    case ResourceType.STONE:
+                        if(retValue.work.wagons.alloc.stone)
+                        {
+                            retValue.work.wagons.alloc.stone -= wagonRestPayload.value;
+                            retValue.work.wagons.idle += wagonRestPayload.value;
+                        }
+                        break;
+                }
+                break;                   
         }
 
         return retValue;
@@ -217,10 +283,10 @@ export default class GameService
 
         // CALCULATES RESOURCE FACTORS
 
-        let factorFood = (0.01 + (retValue.villagers.alloc.food * 0.01))
-        let factorWood = (0.01 + (retValue.villagers.alloc.wood * 0.01))
-        let factorGold = (0.01 + (retValue.villagers.alloc.gold * 0.01))
-        let factorStone = (0.01 + (retValue.villagers.alloc.stone * 0.01))
+        let factorFood = (0.01 + (retValue.work.villagers.alloc.food * 0.01) + (retValue.work.wagons.alloc.food * 0.05))
+        let factorWood = (0.01 + (retValue.work.villagers.alloc.wood * 0.01) + (retValue.work.wagons.alloc.wood * 0.05))
+        let factorGold = (0.01 + (retValue.work.villagers.alloc.gold * 0.01) + (retValue.work.wagons.alloc.gold * 0.05))
+        let factorStone = (0.01 + (retValue.work.villagers.alloc.stone * 0.01) + (retValue.work.wagons.alloc.stone * 0.05))
 
         // EXECUTE CHANGES
 

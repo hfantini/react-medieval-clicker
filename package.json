@@ -155,6 +155,8 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
-    "@types/styled-components": "^5.1.26"
+    "@types/redux-logger": "^3.0.9",
+    "@types/styled-components": "^5.1.26",
+    "redux-logger": "^3.0.6"
   }
 }

@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Villagers } from "../../model/Villagers";
+import { Wagons } from "../../model/Wagons";
 
-export const villagerSlicer = createSlice({
-    name: "VillagerSlicer",
+export const wagonSlicer = createSlice({
+    name: "WagonSlicer",
     initialState: {
         idle: 0,
         alloc:
@@ -17,12 +17,12 @@ export const villagerSlicer = createSlice({
     {
         set: (state, action) =>
         {
-            let payload = (action.payload as Villagers);
+            let payload = (action.payload as Wagons);
             state.idle = payload.idle;
             state.alloc = payload.alloc;
         }
     }
 })
 
-export const {set} = villagerSlicer.actions;
-export default villagerSlicer.reducer;
+export const {set} = wagonSlicer.actions;
+export default wagonSlicer.reducer;
