@@ -15,7 +15,7 @@ This project is a mix of studies using react web framework with non-natural purp
 
 # DISCLAIMER
 
-This project is meant to be a study and update (2022) about React Framework and its derivatives. it's not a project designed to go live in a production scenario. Things like use LocalStorage to keep game data and browser (client) processing is not at all a good practice in real scenarios, and it only has been applied here to fill the purposes mentioned before.
+This project is meant to be a study and update (2022) about React Framework and its derivatives. It's not a project designed to go live in a production scenario. Things like use LocalStorage to keep game data and browser (client) processing is not at all a good practice in real scenarios, and it only has been applied here to fill the purposes mentioned before.
 
 <br/>
 
