@@ -1,23 +1,25 @@
 import './GameMarketItem.scss';
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
-import { MarketPrice } from '../../../../model/MarketPrice';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+
 import IconFood from '../../../../../assets/images/icon_food.jpeg';
-import IconWood from '../../../../../assets/images/icon_wood.jpeg';
 import IconGold from '../../../../../assets/images/icon_gold.jpeg';
 import IconStone from '../../../../../assets/images/icon_stone.jpeg';
+import IconWood from '../../../../../assets/images/icon_wood.jpeg';
 import { ResourceType } from '../../../../enum/ResourceType';
+import { MarketPrice } from '../../../../model/MarketPrice';
 
-function GameMarketItem(props:any) {
-
+function GameMarketItem(props:any) 
+{
   const dispatch = useDispatch();
 
   const renderItemPrice = (price:Array<MarketPrice>) =>
   {
     let retValue:Array<any> = [];
 
-    price.forEach( (element) => 
+    price.forEach( (element, index) => 
     {
       let image:any = null;
 
@@ -42,7 +44,7 @@ function GameMarketItem(props:any) {
 
       retValue.push
       (
-        <div className="GAME-MARKET-ITEM-PRICE-CONTAINER">
+        <div key={`mprice-${index}`} className="GAME-MARKET-ITEM-PRICE-CONTAINER">
           <img src={image}/> <div className="GAME-MARKET-ITEM-PRICE-CONTAINER-VALUE">{element.value}</div>
         </div>
       )

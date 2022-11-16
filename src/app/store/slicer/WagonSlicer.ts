@@ -13,10 +13,9 @@ export const wagonSlicer = createSlice({
             stone: 0
         }
     },
-    reducers: 
+    reducers:
     {
-        set: (state, action) =>
-        {
+        set: (state, action) => {
             let payload = (action.payload as Wagons);
             state.idle = payload.idle;
             state.alloc = payload.alloc;
@@ -24,5 +23,5 @@ export const wagonSlicer = createSlice({
     }
 })
 
-export const {set} = wagonSlicer.actions;
+export const { set } = wagonSlicer.actions;
 export default wagonSlicer.reducer;

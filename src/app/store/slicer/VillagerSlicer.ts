@@ -13,10 +13,9 @@ export const villagerSlicer = createSlice({
             stone: 0
         }
     },
-    reducers: 
+    reducers:
     {
-        set: (state, action) =>
-        {
+        set: (state, action) => {
             let payload = (action.payload as Villagers);
             state.idle = payload.idle;
             state.alloc = payload.alloc;
@@ -24,5 +23,5 @@ export const villagerSlicer = createSlice({
     }
 })
 
-export const {set} = villagerSlicer.actions;
+export const { set } = villagerSlicer.actions;
 export default villagerSlicer.reducer;

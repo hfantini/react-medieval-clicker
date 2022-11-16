@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit';
 import ResourceSlicer from './slicer/ResourceSlicer';
 import UserActionSlicer from './slicer/UserActionSlicer';
 import VillagerSlicer from './slicer/VillagerSlicer';

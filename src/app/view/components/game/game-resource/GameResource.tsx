@@ -1,14 +1,16 @@
 import './GameResource.scss';
+
+import AddIcon from '@mui/icons-material/Add';
+import AgricultureIcon from '@mui/icons-material/Agriculture';
+import PersonIcon from '@mui/icons-material/Person';
+import RemoveIcon from '@mui/icons-material/Remove';
 import React from 'react';
-import { ResourceType } from '../../../../enum/ResourceType';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../../store/Store';
+
+import { ResourceType } from '../../../../enum/ResourceType';
 import { UserAction, UserAction as UserActionType } from '../../../../enum/UserAction';
 import { userAction } from '../../../../store/slicer/UserActionSlicer';
-import PersonIcon from '@mui/icons-material/Person';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
-import AgricultureIcon from '@mui/icons-material/Agriculture';
+import { RootState } from '../../../../store/Store';
 
 function GameResource(props:any) {
 

@@ -8,7 +8,7 @@ enum UserAction {
     PUT_VILLAGER_TO_WORK = 5,
     PUT_VILLAGER_TO_REST = 6,
     PUT_WAGON_TO_WORK = 7,
-    PUT_WAGON_TO_REST = 8    
+    PUT_WAGON_TO_REST = 8
 }
 
-export {UserAction}
+export { UserAction };

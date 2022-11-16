@@ -1,76 +1,61 @@
-import IRepository from "../interface/IRepository";
-import { Account } from "../model/Account";
+import IRepository from '../interface/IRepository';
+import { Account } from '../model/Account';
 
 export default class AccountRepository implements IRepository<Account> {
 
-    getById(id: string): Promise<Account> 
-    {
-        return new Promise( (resolve, reject) => {
-            try
-            {
-                let retValue:Account = null;
+    getById(id: string): Promise<Account> {
+        return new Promise((resolve, reject) => {
+            try {
+                let retValue: Account = null;
 
-                if(typeof id == "string" && window.localStorage.getItem(id) != null) 
-                {
-                    retValue = new Account( JSON.parse( window.localStorage.getItem(id) ) );
+                if (typeof id == "string" && window.localStorage.getItem(id) != null) {
+                    retValue = new Account(JSON.parse(window.localStorage.getItem(id)));
                 }
 
                 resolve(retValue);
             }
-            catch(e)
-            {
+            catch (e) {
                 reject(e);
             }
         })
     }
 
-    create(value: Account): Promise<Account>
-    {
-        return new Promise( (resolve, reject) => {
-            try
-            {
-                if(!this.exists(value.email))
-                {
+    create(value: Account): Promise<Account> {
+        return new Promise((resolve, reject) => {
+            try {
+                if (!this.exists(value.email)) {
                     window.localStorage.setItem(value.email, JSON.stringify(value));
                     resolve(value);
                 }
-                else
-                {
+                else {
                     reject("Account already exists.")
                 }
             }
-            catch(e) 
-            {
+            catch (e) {
                 reject(e);
             }
         });
     }
 
     delete(value: Account): Promise<Account> {
-        return new Promise( (resolve, reject) => 
-        {
-            if(this.exists(value.email))
-            {
+        return new Promise((resolve, reject) => {
+            if (this.exists(value.email)) {
                 window.localStorage.removeItem(value.email);
                 resolve(value);
             }
-            else
-            {
+            else {
                 reject("Account does not exists.")
             }
         });
     }
 
     update(value: Account): Promise<Account> {
-        return new Promise( (resolve, reject) => 
-        {
-            if(this.exists(value.email)) 
-            {
+        return new Promise((resolve, reject) => {
+            if (this.exists(value.email)) {
                 window.localStorage.setItem(value.email, JSON.stringify(value));
                 resolve(value);
             }
-            else
-            {
+            else {
                 reject("Account does not exists.")
             }
         });

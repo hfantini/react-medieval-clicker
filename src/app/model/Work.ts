@@ -1,16 +1,15 @@
 import { Villagers } from "./Villagers";
 import { Wagons } from "./Wagons";
 
-class Work
-{
+class Work {
     villagers: Villagers;
     wagons: Wagons;
 
-    constructor( obj:any )
-    {
+    constructor(obj: any) {
         this.villagers = new Villagers(obj?.villagers)
         this.wagons = new Wagons(obj?.wagons);
     }
 }
 
-export { Work }
+export { Work };
+

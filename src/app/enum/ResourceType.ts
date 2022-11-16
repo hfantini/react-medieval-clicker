@@ -5,4 +5,4 @@ enum ResourceType {
     STONE = 3,
 }
 
-export {ResourceType}
+export { ResourceType };

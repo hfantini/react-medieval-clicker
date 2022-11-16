@@ -1,14 +1,12 @@
-import "./InfoDialog.scss";
-import React from 'react';
-import CloseIcon from "@mui/icons-material/Close";
-import { IconButton } from "@mui/material";
+import './InfoDialog.scss';
 
-const InfoDialog = React.forwardRef( (props:any, ref:any) => 
-{
-    const onCloseClick = () =>
-    {
-        if(props.onCloseClick && typeof props.onCloseClick == "function")
-        {
+import CloseIcon from '@mui/icons-material/Close';
+import { IconButton } from '@mui/material';
+import React from 'react';
+
+const InfoDialog = React.forwardRef((props: any, ref: any) => {
+    const onCloseClick = () => {
+        if (props.onCloseClick && typeof props.onCloseClick == "function") {
             props.onCloseClick();
         }
     }
@@ -19,7 +17,7 @@ const InfoDialog = React.forwardRef( (props:any, ref:any) =>
                 {props.children}
             </div>
             <div className="BOTTOM">
-                <IconButton 
+                <IconButton
                     className="CLOSE-BUTTON"
                     onClick={(e) => onCloseClick()}>
                     <CloseIcon></CloseIcon>

@@ -1,9 +1,9 @@
 import { ResourceType } from "../../enum/ResourceType"
 
 type ResourceIncrementPayload =
-{
-    resource:ResourceType,
-    value:number
-}
+    {
+        resource: ResourceType,
+        value: number
+    }
 
-export {ResourceIncrementPayload}
+export { ResourceIncrementPayload }

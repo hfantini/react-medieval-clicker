@@ -4,15 +4,14 @@ import { UserActionPayload } from "../payload/UserActionPayload";
 
 export const userActionSlicer = createSlice({
     name: "UserActionSlicer",
-    initialState: 
+    initialState:
     {
-        action:UserAction.NONE,
+        action: UserAction.NONE,
         value: 0
     },
-    reducers: 
+    reducers:
     {
-        userAction(state, action) 
-        {
+        userAction(state, action) {
             let payload = (action.payload as UserActionPayload);
             state.action = payload.action;
             state.value = payload.value
@@ -20,5 +19,5 @@ export const userActionSlicer = createSlice({
     }
 })
 
-export const {userAction} = userActionSlicer.actions;
+export const { userAction } = userActionSlicer.actions;
 export default userActionSlicer.reducer;

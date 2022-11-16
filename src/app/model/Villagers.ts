@@ -1,15 +1,13 @@
 import { Resources } from "./Resources";
 
-class Villagers
-{
+class Villagers {
     idle: number;
     alloc: Resources;
 
-    constructor( obj:any )
-    {
+    constructor(obj: any) {
         this.idle = obj?.idle | 0;
         this.alloc = new Resources(obj?.alloc);
     }
 }
 
-export {Villagers}
+export { Villagers };

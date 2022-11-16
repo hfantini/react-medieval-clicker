@@ -1,17 +1,18 @@
+import './GameUI.scss';
+
 import React, { useState } from 'react';
+
 import GameMarket from '../game-market/GameMarket';
 import GameResourceTracker from '../game-resource-tracker/GameResourceTracker';
 import GameResources from '../game-resources/GameResources';
 import GameSidebar from '../game-sidebar/GameSidebar';
 import GameUpgrades from '../game-upgrades/GameUpgrades';
-import './GameUI.scss';
 
 function GameUI() {
 
   const [selectedOption, setSelectedOption] = useState("resources");
 
-  const onSidebarItemClick = (item:string) => 
-  {
+  const onSidebarItemClick = (item: string) => {
     setSelectedOption(item);
   }
 
@@ -25,15 +26,15 @@ function GameUI() {
           <GameSidebar selected={selectedOption} onSelect={onSidebarItemClick}></GameSidebar>
         </div>
         <div className="GAME-UI-PAGE">
-        { selectedOption == "resources" &&
-          <GameResources></GameResources>
-        }
-        { selectedOption == "market" &&
-          <GameMarket></GameMarket>
-        }
-        { selectedOption == "upgrades" &&
-          <GameUpgrades></GameUpgrades>
-        }      
+          {selectedOption == "resources" &&
+            <GameResources></GameResources>
+          }
+          {selectedOption == "market" &&
+            <GameMarket></GameMarket>
+          }
+          {selectedOption == "upgrades" &&
+            <GameUpgrades></GameUpgrades>
+          }
         </div>
       </div>
     </div>

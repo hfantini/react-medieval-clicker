@@ -9,10 +9,9 @@ export const resourceSlicer = createSlice({
         gold: 0,
         stone: 0
     },
-    reducers: 
+    reducers:
     {
-        set: (state, action) =>
-        {
+        set: (state, action) => {
             let payload = (action.payload as Resources);
             state.food = payload.food;
             state.wood = payload.wood;
@@ -22,5 +21,5 @@ export const resourceSlicer = createSlice({
     }
 })
 
-export const {set} = resourceSlicer.actions;
+export const { set } = resourceSlicer.actions;
 export default resourceSlicer.reducer;

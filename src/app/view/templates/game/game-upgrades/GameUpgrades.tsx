@@ -1,5 +1,5 @@
-import './GameUpgrades.scss';
 import React from 'react';
+import './GameUpgrades.scss';
 
 function GameUpgrades() {
 

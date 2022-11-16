@@ -1,14 +1,12 @@
 import { MarketPrice } from "./MarketPrice";
 
-class MarketItem
-{
+class MarketItem {
     name: string;
     desc: string;
     icon: any;
     price: Array<MarketPrice>;
 
-    constructor( obj:any )
-    {
+    constructor(obj: any) {
         this.name = obj?.name;
         this.desc = obj?.desc;
         this.icon = obj?.icon;
@@ -16,4 +14,4 @@ class MarketItem
     }
 }
 
-export {MarketItem}
+export { MarketItem };

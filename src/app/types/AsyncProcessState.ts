@@ -1,5 +1,5 @@
 type AsyncProcessState = {
     complete: boolean;
-    success:boolean;
+    success: boolean;
     message?: string;
 }

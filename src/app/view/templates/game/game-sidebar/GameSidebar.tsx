@@ -1,37 +1,36 @@
 import './GameSidebar.scss';
-import React, { useEffect } from 'react';
-import PaidIcon from '@mui/icons-material/Paid';
-import ManageHistoryIcon from '@mui/icons-material/ManageHistory';
-import StoreIcon from '@mui/icons-material/Store';
 
-function GameSidebar(props:any) 
-{  
-  const onItemClick = (value:any) =>
-  {
+import ManageHistoryIcon from '@mui/icons-material/ManageHistory';
+import PaidIcon from '@mui/icons-material/Paid';
+import StoreIcon from '@mui/icons-material/Store';
+import React from 'react';
+
+function GameSidebar(props: any) {
+  const onItemClick = (value: any) => {
     props.onSelect(value);
   }
 
   return (
     <div className="GAME-SIDEBAR">
       <div id=""
-           className = {`GAME-SIDEBAR-BUTTON ${props.selected == 'resources' ? "SELECTED" : ''}`}
-           onClick={(evt) => onItemClick("resources")}
+        className={`GAME-SIDEBAR-BUTTON ${props.selected == 'resources' ? "SELECTED" : ''}`}
+        onClick={(evt) => onItemClick("resources")}
       >
-        <PaidIcon/>
+        <PaidIcon />
       </div>
 
       <div id=""
-           className = {`GAME-SIDEBAR-BUTTON ${props.selected == 'market' ? "SELECTED" : ''}`}
-           onClick={(evt) => onItemClick("market")}
+        className={`GAME-SIDEBAR-BUTTON ${props.selected == 'market' ? "SELECTED" : ''}`}
+        onClick={(evt) => onItemClick("market")}
       >
-        <StoreIcon/>
-      </div>      
-      
+        <StoreIcon />
+      </div>
+
       <div id=""
-           className ={`GAME-SIDEBAR-BUTTON ${props.selected == 'upgrades' ? "SELECTED" : ''}`}
-           onClick={(evt) => onItemClick("upgrades")}
+        className={`GAME-SIDEBAR-BUTTON ${props.selected == 'upgrades' ? "SELECTED" : ''}`}
+        onClick={(evt) => onItemClick("upgrades")}
       >
-        <ManageHistoryIcon/>
+        <ManageHistoryIcon />
       </div>
     </div>
   );

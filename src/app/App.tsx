@@ -1,11 +1,13 @@
-import './App.scss'
+import './App.scss';
+
 import React, { useEffect } from 'react';
-import { Routes, Route, Navigate } from "react-router-dom"
-import Splash from "./view/templates/splash/Splash"
-import Login from "./view/templates/login/Login"
-import Game from './view/templates/game/Game'
-import About from "./view/templates/about/About"
+import { Navigate, Route, Routes } from 'react-router-dom';
+
+import About from './view/templates/about/About';
+import Game from './view/templates/game/Game';
+import Login from './view/templates/login/Login';
 import NewAccount from './view/templates/new-account/NewAccount';
+import Splash from './view/templates/splash/Splash';
 
 function App() {
 
